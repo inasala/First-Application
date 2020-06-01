@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on 2020/6/1
-@author: iansala
+@author: ZA88400
 掛け算の暗算アプリ
 
 【機能】
@@ -31,11 +31,12 @@ class Application(tk.Frame):
         self.createWidgets() #ウィジェットの作成
 
     def createWidgets(self): #ウィジェットの作成
-        #和の計算をするためのテキストボックスやラベル、ボタンの作成
-        a = randint(1,100)
+        #掛け算のテキストボックスやラベル、ボタンの作成
+        a = randint(1,100) #掛け算の問題
         b = randint(1,100)
-        right_answer = a*b
+        right_answer = a*b #掛け算の答え
 
+        #掛け算の式の表示
         self.question1_1 = tk.Label(text=a,fg="black",bg="pink",font=("Helvetica",30))
         self.question1_1.place(x=40,y=50)
         self.question1_2 = tk.Label(text=b,fg="black",bg="pink",font=("Helvetica",30))
@@ -48,13 +49,15 @@ class Application(tk.Frame):
         self.label3 = tk.Label(text="=",fg="black",bg="pink",font=("Helvetica",30,"bold"))
         self.label3.place(x=258,y=53)
 
+        #"答え合わせ"ボタンの表示
         self.button1 = tk.Button(text="答え合わせ",command=self.button1Click(right_answer))
         self.button1.place(x=120, y=140,height=40, width=80)
 
+        #"次の問題"ボタンの表示
         self.button2 = tk.Button(text="次の問題",command=self.button2Click)
         self.button2.place(x=120, y=210,height=40, width=80)
 
-    def button1Click(self,right_answer): #ボタンが押された時に呼ばれるメソッド
+    def button1Click(self,right_answer): #「答え合わせ」ボタンが押された時に呼ばれるメソッド
         def x():
             if right_answer == int(self.entry1.get()):
                 self.answer1 = tk.Label(text="正解！！",fg="red",bg="pink",font=("Helvetica",30))
@@ -64,14 +67,14 @@ class Application(tk.Frame):
                 self.answer1.place(x=250, y=135)
         return x
 
-    def button2Click(self): #ボタンが押された時に呼ばれるメソッド
+    def button2Click(self): #「次の問題」ボタンが押された時に呼ばれるメソッド。ウィジェットを更新する
         self.entry1.delete(0,tk.END)
         self.answer1.place_forget()
         self.createWidgets()
 
 def main():
     win = tk.Tk()
-    win.resizable(width=True, height=True) #ウィンドウを固定サイズに
+    win.resizable(width=True, height=True) #ウィンドウサイズは変更可能
     app = Application(master=win)
     app.mainloop()
 
